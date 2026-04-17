@@ -1,0 +1,85 @@
+[index.js](https://github.com/user-attachments/files/26838526/index.js)
+
+const menuBtn = document.getElementById("menu-btn");
+const navLinks = document.getElementById("nav-links");
+const menuBtnIcon = menuBtn.querySelector("i");
+
+menuBtn.addEventListener("click", (e) => {
+  navLinks.classList.toggle("open");
+
+  const isOpen = navLinks.classList.contains("open");
+  menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+});
+
+navLinks.addEventListener("click", (e) => {
+  navLinks.classList.remove("open");
+  menuBtnIcon.setAttribute("class", "ri-menu-line");
+});
+
+const scrollRevealOption = {
+  distance: "50px",
+  origin: "bottom",
+  duration:1000,
+};
+
+// header container
+ScrollReveal().reveal(".header__container .sectionsubheader", {
+  ...scrollRevealOption,
+});
+
+ScrollReveal().reveal(".header__container h1", {
+  ...scrollRevealOption,
+  delay: 500,
+});
+
+ScrollReveal().reveal(".header__container .btn", {
+  ...scrollRevealOption,
+  delay:500,
+});
+
+// room container
+ScrollReveal().reveal(".room__card", {
+  ...scrollRevealOption,
+  interval: 500,
+});
+
+// feature container
+ScrollReveal().reveal(".feature__card", {
+  ...scrollRevealOption,
+  interval: 500,
+});
+
+// news container
+ScrollReveal().reveal(".news__card", {
+  ...scrollRevealOption,
+  interval: 500,
+});
+
+function toggleLanguage() {
+  const body = document.body;
+  const elements = document.querySelectorAll("[data-en]");
+
+  // لو الصفحة إنجليزي حولها عربي
+  if (body.classList.contains("ltr") || !body.classList.contains("rtl")) {
+    body.classList.remove("ltr");
+    body.classList.add("rtl");
+    document.documentElement.lang = "ar";
+    document.documentElement.dir = "rtl";
+
+    elements.forEach((el) => {
+      el.textContent = el.getAttribute("data-ar");
+    });
+  } 
+  // لو الصفحة عربي حولها إنجليزي
+  else {
+    body.classList.remove("rtl");
+    body.classList.add("ltr");
+    document.documentElement.lang = "en";
+    document.documentElement.dir = "ltr";
+
+    elements.forEach((el) => {
+      el.textContent = el.getAttribute("data-en");
+    });
+  }
+}
+
